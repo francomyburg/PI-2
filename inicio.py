@@ -19,6 +19,7 @@ st.image("img/grafico1.png")
 #descripcion del grafico
 st.text("en el grafico se observa que el rubro con mayor crecimiento estos \nultimos 4 años fue el rubro de IT con un 49%")
 #datrame crecimiento de empresas IT
+st.markdown('<br><h3 align="center"><u>Empresas IT con mayor crecimiento en los ultimos 3 años</u></h3><br>', unsafe_allow_html=True)
 df=pd.read_csv("datos/it.csv")
 df=df.sort_values(by="Close",ascending=False)
 #separar columnas

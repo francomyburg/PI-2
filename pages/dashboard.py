@@ -4,7 +4,7 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-st.subheader('Información de dimensiones')
+
 df5=pd.read_csv("datos/df5.csv")
 df5.round(4)
 df5["Date"]=df5["Date"].astype("datetime64")
@@ -38,24 +38,24 @@ def rsigrapgh(empresa):
     rsi=(100 * avg_up/(avg_up+avg_down))
     plt.style.use('fivethirtyeight')
 
-    # Make our resulting figure much bigger
+   
     
     plt.rcParams['figure.figsize'] = (14, 5)
     fig, (ax1, ax2) = plt.subplots(nrows=2, ncols=1)
-    # Create two charts on the same figure.
+    # creando dos figuras
     ax1 = plt.subplot2grid((10,1), (0,0), rowspan = 4, colspan = 1)
     ax2 = plt.subplot2grid((10,1), (5,0), rowspan = 4, colspan = 1)
 
-    # First chart:
-    # Plot the closing price on the first chart
+    # Primer grafico:
+    # precios de cierre en el primer grafico
     ax1.plot(firstsolar2["Date"],firstsolar2['Close'], linewidth=2)
     ax1.set_title('FSLR Close Price')
 
-    # Second chart
-    # Plot the RSI
+    # Segundo Grafico
+    # Grafico Rsi
     ax2.set_title('Relative Strength Index')
     ax2.plot(mask["Date"],rsi, color='orange', linewidth=1)
-    # Add two horizontal lines, signalling the buy and sell ranges.
+    # Se añaden dos lineas horizontales de señales de compra y venta
     # Oversold
     ax2.axhline(30, linestyle='--', linewidth=1.5, color='green')
     # Overbought
@@ -81,6 +81,8 @@ def rsi(symbol):
 
 empresas=['ANET', 'ENPH', 'FSLR', 'NVDA', 'ON']
 empresa_elegida = st.sidebar.selectbox("Elige una empresa", empresas)
+
+st.subheader('Información de '+df5[df5["Symbol"]==empresa_elegida].Security.iloc[0])
 df_filtrado = df[df["symbol"] == empresa_elegida]
 col1,col2,col3=st.columns(3)
 col1.metric("Market Cap","$"+str(round(df_filtrado["marketCap"].iloc[0]/1000000,0))+"M")
@@ -99,5 +101,6 @@ with st.container():
         fig2=px.bar(roi, x="Security", y="Close", title="ROI",color="Security")
         st.plotly_chart(fig2,use_container_width=True)
 #grafico rsi
+st.markdown('<h1 align="center">RSI</h1>', unsafe_allow_html=True)
 with st.container():
     st.pyplot(rsigrapgh(empresa_elegida))

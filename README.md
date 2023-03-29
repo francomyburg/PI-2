@@ -27,5 +27,6 @@ El dashboard se realizo con el framework streamlit de python,consta de dos pagin
 - Yfinance 
 - Seaborn
 
-link de interes:
-Yfinance(https://pypi.org/project/yfinance/ )
+link de interes:<br>
+**Dashboard** (https://francomyburg-pi-2-inicio-6vzbs0.streamlit.app/dashboard)<br>
+**Yfinance** (https://pypi.org/project/yfinance/ )
